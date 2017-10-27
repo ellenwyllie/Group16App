@@ -37,4 +37,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
 
+    @IBAction func signInBtnClicked(_ sender: Any) {
+        let username = usernameTextField.text
+        let password = passwordTextField.text
+        
+        let defaults = UserDefaults.standard
+        let storedUsername = defaults.string(forKey: "username")
+        let storedPassword = defaults.string(forKey: "password")
+        
+        if (storedUsername == username) {
+            if (storedPassword == password) {
+                // Login is successful
+                defaults.set(true, forKey: "isUserLoggedIn")
+                defaults.synchronize()
+                
+                performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+            }
+        }
+    }
 }
