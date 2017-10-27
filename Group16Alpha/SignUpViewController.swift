@@ -65,8 +65,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Store data
         let defaults = UserDefaults.standard
-        defaults.set(username, forKey: username!)
-        defaults.set(password, forKey: password!)
+        defaults.set(username, forKey: "username")
+        defaults.set(password, forKey: "password")
         
         defaults.synchronize()
         
