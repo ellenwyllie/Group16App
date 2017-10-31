@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24D899B21FA80E8F00E47804 /* AvailablePetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */; };
+		24D899B41FA80EC900E47804 /* PetPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D899B31FA80EC900E47804 /* PetPageViewController.swift */; };
 		C14655221FA116DF006D20F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14655211FA116DF006D20F4 /* LoginViewController.swift */; };
 		C14655241FA12245006D20F4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14655231FA12245006D20F4 /* SignUpViewController.swift */; };
 		C19049041FA00D5F000F931B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19049031FA00D5F000F931B /* AppDelegate.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailablePetsTableViewController.swift; sourceTree = "<group>"; };
+		24D899B31FA80EC900E47804 /* PetPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetPageViewController.swift; sourceTree = "<group>"; };
 		C14655211FA116DF006D20F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C14655231FA12245006D20F4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C19049001FA00D5F000F931B /* Group16Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group16Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +76,8 @@
 				C1F198471FA800DA00B41E96 /* sweet_sensations */,
 				C19049121FA00D5F000F931B /* Info.plist */,
 				C190490A1FA00D5F000F931B /* Group16Alpha.xcdatamodeld */,
+				24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */,
+				24D899B31FA80EC900E47804 /* PetPageViewController.swift */,
 			);
 			path = Group16Alpha;
 			sourceTree = "<group>";
@@ -151,6 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C14655221FA116DF006D20F4 /* LoginViewController.swift in Sources */,
+				24D899B41FA80EC900E47804 /* PetPageViewController.swift in Sources */,
+				24D899B21FA80E8F00E47804 /* AvailablePetsTableViewController.swift in Sources */,
 				C19049041FA00D5F000F931B /* AppDelegate.swift in Sources */,
 				C14655241FA12245006D20F4 /* SignUpViewController.swift in Sources */,
 				C190490C1FA00D5F000F931B /* Group16Alpha.xcdatamodeld in Sources */,
