@@ -13,12 +13,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var fidoFinderLabel: UILabel!
     
     var myAlert:UIAlertController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fidoFinderLabel.textColor = UIColor(red: (0/255.0), green: (128/225.0), blue: (128/225.0), alpha: 1.0)
         signInButton.layer.cornerRadius = 10
         
         usernameTextField.delegate = self
@@ -37,7 +38,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-
+    
+    
     @IBAction func signInBtnClicked(_ sender: Any) {
         let username = usernameTextField.text
         let password = passwordTextField.text

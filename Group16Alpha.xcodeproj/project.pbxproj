@@ -14,6 +14,8 @@
 		C190490C1FA00D5F000F931B /* Group16Alpha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C190490A1FA00D5F000F931B /* Group16Alpha.xcdatamodeld */; };
 		C190490E1FA00D5F000F931B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C190490D1FA00D5F000F931B /* Assets.xcassets */; };
 		C19049111FA00D5F000F931B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C190490F1FA00D5F000F931B /* LaunchScreen.storyboard */; };
+		C1F198481FA800DA00B41E96 /* sweet_sensations in Resources */ = {isa = PBXBuildFile; fileRef = C1F198471FA800DA00B41E96 /* sweet_sensations */; };
+		C1F1984A1FA800F400B41E96 /* Sweet Sensations Personal Use.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F198491FA800F400B41E96 /* Sweet Sensations Personal Use.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C190490D1FA00D5F000F931B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C19049101FA00D5F000F931B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C19049121FA00D5F000F931B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1F198471FA800DA00B41E96 /* sweet_sensations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sweet_sensations; sourceTree = "<group>"; };
+		C1F198491FA800F400B41E96 /* Sweet Sensations Personal Use.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sweet Sensations Personal Use.ttf"; path = "../Sweet Sensations Personal Use.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				C14655231FA12245006D20F4 /* SignUpViewController.swift */,
 				C190490D1FA00D5F000F931B /* Assets.xcassets */,
 				C190490F1FA00D5F000F931B /* LaunchScreen.storyboard */,
+				C1F198491FA800F400B41E96 /* Sweet Sensations Personal Use.ttf */,
+				C1F198471FA800DA00B41E96 /* sweet_sensations */,
 				C19049121FA00D5F000F931B /* Info.plist */,
 				C190490A1FA00D5F000F931B /* Group16Alpha.xcdatamodeld */,
 			);
@@ -131,6 +137,8 @@
 			files = (
 				C19049111FA00D5F000F931B /* LaunchScreen.storyboard in Resources */,
 				C190490E1FA00D5F000F931B /* Assets.xcassets in Resources */,
+				C1F198481FA800DA00B41E96 /* sweet_sensations in Resources */,
+				C1F1984A1FA800F400B41E96 /* Sweet Sensations Personal Use.ttf in Resources */,
 				C19049091FA00D5F000F931B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

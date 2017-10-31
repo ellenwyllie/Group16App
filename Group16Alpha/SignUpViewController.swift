@@ -15,13 +15,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var fidoFinderLabel: UILabel!
    
     var myAlert:UIAlertController? = nil
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fidoFinderLabel.textColor = UIColor(red: (0/255.0), green: (128/225.0), blue: (128/225.0), alpha: 1.0)
+
         signUpButton.layer.cornerRadius = 10
         
         usernameTextField.delegate = self

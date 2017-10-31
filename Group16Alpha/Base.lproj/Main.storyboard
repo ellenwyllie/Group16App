@@ -6,8 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Sweet Sensations Personal Use.ttf">
+            <string>SweetSensationsPersonalUse</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="UdI-HZ-oGu">
@@ -31,15 +37,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jq-ZJ-8Dw">
-                                <rect key="frame" x="157" y="129" width="61" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jq3-dG-2MO">
                                 <rect key="frame" x="46" y="471" width="282" height="30"/>
-                                <color key="backgroundColor" red="0.3488592836827486" green="0.69255631345177671" blue="0.61238615096951321" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FQK-lY-5uk"/>
                                     <constraint firstAttribute="width" constant="282" id="UaB-1x-Ydb"/>
@@ -73,23 +73,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fido Finder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jq-ZJ-8Dw">
+                                <rect key="frame" x="16" y="94" width="343" height="103"/>
+                                <color key="tintColor" red="0.34885928370000002" green="0.69255631350000002" blue="0.61238615100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="103" id="bFR-nr-6eJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SweetSensationsPersonalUse" family="Sweet Sensations Personal Use" pointSize="72"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qFY-ad-lb0" firstAttribute="centerX" secondItem="46D-1S-BMq" secondAttribute="centerX" id="1vs-kt-BIT"/>
                             <constraint firstItem="jq3-dG-2MO" firstAttribute="top" secondItem="WYe-Jl-veH" secondAttribute="bottom" constant="78" id="8KL-TQ-8Ig"/>
+                            <constraint firstItem="5jq-ZJ-8Dw" firstAttribute="top" secondItem="sBN-Ui-sar" secondAttribute="bottom" constant="74" id="C9q-ih-Ax9"/>
                             <constraint firstItem="5xE-jK-bwe" firstAttribute="centerX" secondItem="46D-1S-BMq" secondAttribute="centerX" id="Cnm-Lo-FMv"/>
                             <constraint firstItem="WYe-Jl-veH" firstAttribute="centerX" secondItem="46D-1S-BMq" secondAttribute="centerX" id="LjI-JF-RhE"/>
-                            <constraint firstItem="WYe-Jl-veH" firstAttribute="centerX" secondItem="5jq-ZJ-8Dw" secondAttribute="centerX" id="QES-qr-7bh"/>
                             <constraint firstItem="jq3-dG-2MO" firstAttribute="centerX" secondItem="46D-1S-BMq" secondAttribute="centerX" id="U2p-pK-OLe"/>
+                            <constraint firstItem="5jq-ZJ-8Dw" firstAttribute="centerX" secondItem="5xE-jK-bwe" secondAttribute="centerX" id="V3T-q6-BYy"/>
                             <constraint firstItem="qFY-ad-lb0" firstAttribute="top" secondItem="jq3-dG-2MO" secondAttribute="bottom" constant="26" id="Vwd-1T-LE0"/>
-                            <constraint firstItem="5xE-jK-bwe" firstAttribute="top" secondItem="5jq-ZJ-8Dw" secondAttribute="bottom" constant="142" id="Y9o-2W-ot8"/>
                             <constraint firstItem="WYe-Jl-veH" firstAttribute="top" secondItem="46D-1S-BMq" secondAttribute="top" constant="363" id="hJw-XN-gCe"/>
+                            <constraint firstItem="5jq-ZJ-8Dw" firstAttribute="leading" secondItem="46D-1S-BMq" secondAttribute="leadingMargin" id="vJK-wH-veu"/>
                             <constraint firstItem="WYe-Jl-veH" firstAttribute="top" secondItem="5xE-jK-bwe" secondAttribute="bottom" constant="32" id="zr9-7D-DrU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gFL-BT-B0d"/>
                     <connections>
+                        <outlet property="fidoFinderLabel" destination="5jq-ZJ-8Dw" id="81T-Xx-4ip"/>
                         <outlet property="passwordTextField" destination="WYe-Jl-veH" id="JDU-Qj-ocd"/>
                         <outlet property="signInButton" destination="jq3-dG-2MO" id="V1m-el-tkS"/>
                         <outlet property="usernameTextField" destination="5xE-jK-bwe" id="rxf-rc-TEw"/>
@@ -114,7 +126,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8B-yp-7Hg">
                                 <rect key="frame" x="46" y="456" width="282" height="30"/>
-                                <color key="backgroundColor" red="0.34885928370000002" green="0.69255631350000002" blue="0.61238615100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="282" id="3Lr-9m-5CM"/>
                                     <constraint firstAttribute="height" constant="30" id="NZH-qb-UBW"/>
@@ -149,12 +161,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqw-M0-9Xx">
-                                <rect key="frame" x="158" y="113" width="61" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63K-Q1-g9U">
                                 <rect key="frame" x="64" y="514" width="248" height="30"/>
                                 <state key="normal" title="Already have an accont? Log in here">
@@ -174,25 +180,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fido Finder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5s-U8-Ooo">
+                                <rect key="frame" x="16" y="98" width="343" height="128"/>
+                                <color key="tintColor" red="0.34885928370000002" green="0.69255631350000002" blue="0.61238615100000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="SweetSensationsPersonalUse" family="Sweet Sensations Personal Use" pointSize="72"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mFZ-1a-1EQ" firstAttribute="top" secondItem="OWV-zh-w8n" secondAttribute="top" constant="269" id="6wT-Dd-Gxi"/>
+                            <constraint firstItem="mFZ-1a-1EQ" firstAttribute="top" secondItem="K5s-U8-Ooo" secondAttribute="bottom" constant="43" id="9To-tc-Gdw"/>
                             <constraint firstItem="63K-Q1-g9U" firstAttribute="centerX" secondItem="OWV-zh-w8n" secondAttribute="centerX" id="JUm-oc-KRq"/>
-                            <constraint firstItem="Xqw-M0-9Xx" firstAttribute="top" secondItem="XdW-lP-SkL" secondAttribute="bottom" constant="93" id="KmN-fP-KXY"/>
                             <constraint firstItem="R8B-yp-7Hg" firstAttribute="centerX" secondItem="OWV-zh-w8n" secondAttribute="centerX" id="Psc-EJ-cl5"/>
+                            <constraint firstItem="K5s-U8-Ooo" firstAttribute="top" secondItem="XdW-lP-SkL" secondAttribute="bottom" constant="78" id="beN-eY-NeV"/>
                             <constraint firstItem="mFZ-1a-1EQ" firstAttribute="centerX" secondItem="OWV-zh-w8n" secondAttribute="centerX" id="d2g-0X-edT"/>
                             <constraint firstItem="QDP-DB-1EV" firstAttribute="centerX" secondItem="OWV-zh-w8n" secondAttribute="centerX" id="dPW-10-Dd2"/>
+                            <constraint firstItem="K5s-U8-Ooo" firstAttribute="centerX" secondItem="mFZ-1a-1EQ" secondAttribute="centerX" id="eyD-MC-EUS"/>
                             <constraint firstItem="JNj-uz-0SJ" firstAttribute="top" secondItem="mFZ-1a-1EQ" secondAttribute="bottom" constant="24" id="fEp-dh-y4L"/>
                             <constraint firstItem="R8B-yp-7Hg" firstAttribute="top" secondItem="QDP-DB-1EV" secondAttribute="bottom" constant="49" id="lYB-Sh-uCj"/>
+                            <constraint firstItem="K5s-U8-Ooo" firstAttribute="leading" secondItem="OWV-zh-w8n" secondAttribute="leadingMargin" id="m0S-fw-Nke"/>
                             <constraint firstItem="63K-Q1-g9U" firstAttribute="top" secondItem="R8B-yp-7Hg" secondAttribute="bottom" constant="28" id="nly-7d-PjX"/>
                             <constraint firstItem="JNj-uz-0SJ" firstAttribute="centerX" secondItem="OWV-zh-w8n" secondAttribute="centerX" id="oVw-bX-wyB"/>
                             <constraint firstItem="QDP-DB-1EV" firstAttribute="top" secondItem="JNj-uz-0SJ" secondAttribute="bottom" constant="24" id="uLj-p0-xQg"/>
-                            <constraint firstItem="mFZ-1a-1EQ" firstAttribute="centerX" secondItem="Xqw-M0-9Xx" secondAttribute="centerX" constant="-1.5" id="uz8-Cy-UEO"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="QDP-DB-1EV" id="4Im-QO-5g3"/>
+                        <outlet property="fidoFinderLabel" destination="K5s-U8-Ooo" id="LBb-bw-nG6"/>
                         <outlet property="passwordTextField" destination="JNj-uz-0SJ" id="VkP-Ft-hCj"/>
                         <outlet property="signUpButton" destination="R8B-yp-7Hg" id="v9T-AU-azp"/>
                         <outlet property="usernameTextField" destination="mFZ-1a-1EQ" id="CSN-nb-QEc"/>
@@ -200,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7B8-d1-oGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1660" y="128"/>
+            <point key="canvasLocation" x="1660" y="127.28635682158921"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="f8x-6V-3H4">
@@ -235,7 +251,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1No-TY-WPy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="619-61-h5S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="619-61-h5S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
