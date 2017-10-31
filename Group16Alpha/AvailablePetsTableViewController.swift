@@ -31,6 +31,9 @@ class AvailablePetsTableViewController: UITableViewController {
         pet.setValue("Dog", forKey: "type")
         pet.setValue("Austin", forKey: "city")
         pet.setValue("Texas", forKey: "state")
+        pet.setValue("Phat poodle with sick flow", forKey: "desc")
+        
+        //let fidoImage = UIImageJPEGRepresentation(fido, 1);
         
         
         do {
@@ -76,8 +79,9 @@ class AvailablePetsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
+        cell.photo.image = UIImage(named: "fido")
+        
         // Configure the cell...
 
         return cell
@@ -119,14 +123,27 @@ class AvailablePetsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
+        let nextScene = segue.destination as! PetPageViewController
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let selectedPet = petList[indexPath.row]
+            
+            nextScene.age = selectedPet.value(forKey: "age") as! Int
+            nextScene.breed = selectedPet.value(forKey: "breed") as! String
+            nextScene.name = selectedPet.value(forKey: "name") as! String
+            nextScene.location = selectedPet.value(forKey: "city") as! String
+            nextScene.gender = selectedPet.value(forKey: "gender") as! String
+            nextScene.desc = selectedPet.value(forKey: "desc") as! String
+            nextScene.pic = UIImage(named: "fido")!
+            
+        }
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

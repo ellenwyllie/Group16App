@@ -10,8 +10,32 @@ import UIKit
 
 class PetPageViewController: UIViewController {
 
+    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var breedLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    var name: String = ""
+    var breed: String = ""
+    var age: Int = 0
+    var location: String = ""
+    var gender: String = ""
+    var desc: String = ""
+    var pic = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photo.image = pic
+        nameLabel.text = name
+        breedLabel.text = breed
+        ageLabel.text = "\(age)"
+        locationLabel.text = location
+        genderLabel.text = gender
+        descriptionLabel.text = desc
 
         // Do any additional setup after loading the view.
     }
