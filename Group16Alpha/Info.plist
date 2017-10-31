@@ -45,5 +45,7 @@
 	<array>
 		<string>Sweet Sensations Personal Use.ttf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

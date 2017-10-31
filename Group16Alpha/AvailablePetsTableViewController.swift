@@ -33,9 +33,6 @@ class AvailablePetsTableViewController: UITableViewController {
         pet.setValue("Texas", forKey: "state")
         pet.setValue("Phat poodle with sick flow", forKey: "desc")
         
-        //let fidoImage = UIImageJPEGRepresentation(fido, 1);
-        
-        
         do {
             try managedContext.save()
         } catch {
@@ -48,46 +45,44 @@ class AvailablePetsTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        print("Debug 1")
         super.viewDidLoad()
-        print("Debug 2")
+        self.title = "Available Pets"
         loadData()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.navigationBar.barTintColor = UIColor(red: (0/255.0), green: (128/225.0), blue: (128/225.0), alpha: 1.0)
+        self.navigationController!.navigationBar.tintColor = UIColor.black
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController!.navigationBar.barTintColor = nil
+        self.navigationController!.navigationBar.isTranslucent = true
+        self.navigationController!.navigationBar.tintColor = UIColor.black
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return petList.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
+        
         cell.photo.image = UIImage(named: "fido")
         
-        // Configure the cell...
-
         return cell
     }
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -123,12 +118,7 @@ class AvailablePetsTableViewController: UITableViewController {
     }
     */
 
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
         let nextScene = segue.destination as! PetPageViewController
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let selectedPet = petList[indexPath.row]
@@ -140,9 +130,7 @@ class AvailablePetsTableViewController: UITableViewController {
             nextScene.gender = selectedPet.value(forKey: "gender") as! String
             nextScene.desc = selectedPet.value(forKey: "desc") as! String
             nextScene.pic = UIImage(named: "fido")!
-            
         }
-        // Pass the selected object to the new view controller.
     }
     
 

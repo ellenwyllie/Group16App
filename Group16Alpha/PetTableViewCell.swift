@@ -12,7 +12,6 @@ class PetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var photo: UIImageView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,8 +19,8 @@ class PetTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        photo.contentMode = .scaleAspectFit
     }
 
 }

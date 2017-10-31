@@ -70,17 +70,17 @@
 			children = (
 				C19049031FA00D5F000F931B /* AppDelegate.swift */,
 				C19049071FA00D5F000F931B /* Main.storyboard */,
-				24D899B51FA8182500E47804 /* PetTableViewCell.swift */,
 				C14655211FA116DF006D20F4 /* LoginViewController.swift */,
 				C14655231FA12245006D20F4 /* SignUpViewController.swift */,
-				C190490D1FA00D5F000F931B /* Assets.xcassets */,
+				24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */,
+				24D899B51FA8182500E47804 /* PetTableViewCell.swift */,
+				24D899B31FA80EC900E47804 /* PetPageViewController.swift */,
 				C190490F1FA00D5F000F931B /* LaunchScreen.storyboard */,
+				C190490D1FA00D5F000F931B /* Assets.xcassets */,
 				C1F198491FA800F400B41E96 /* Sweet Sensations Personal Use.ttf */,
 				C1F198471FA800DA00B41E96 /* sweet_sensations */,
 				C19049121FA00D5F000F931B /* Info.plist */,
 				C190490A1FA00D5F000F931B /* Group16Alpha.xcdatamodeld */,
-				24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */,
-				24D899B31FA80EC900E47804 /* PetPageViewController.swift */,
 			);
 			path = Group16Alpha;
 			sourceTree = "<group>";

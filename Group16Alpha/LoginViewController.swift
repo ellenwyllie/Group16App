@@ -19,7 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fidoFinderLabel.textColor = UIColor(red: (0/255.0), green: (128/225.0), blue: (128/225.0), alpha: 1.0)
+        fidoFinderLabel.textColor = UIColor(red: (0/255), green: (128/225), blue: (128/225), alpha: 1)
         signInButton.layer.cornerRadius = 10
         
         usernameTextField.delegate = self
@@ -56,9 +56,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: "AvailablePetsSegue", sender: nil)
         }
         else {
+            // Login not successful
             defaults.set(false, forKey: "isUserLoggedIn")
             
-            self.myAlert = UIAlertController(title: "Alert", message: "Either username or password incorrect.", preferredStyle: UIAlertControllerStyle.alert)
+            self.myAlert = UIAlertController(title: "Alert", message: "Incorrect username or password.", preferredStyle: UIAlertControllerStyle.alert)
             
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             

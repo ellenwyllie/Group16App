@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -74,23 +74,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         // Display alert message with confirmation
         self.myAlert = UIAlertController(title: "Alert", message: "Sign up complete!", preferredStyle: UIAlertControllerStyle.alert)
-        
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        
         self.myAlert!.addAction(okAction)
-        
         self.present(self.myAlert!, animated: true, completion: nil)
-        
         
     }
     
     func displayAlertMessage(userMessage: String) {
         self.myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
-        
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-
         self.myAlert!.addAction(okAction)
-        
         self.present(self.myAlert!, animated: true, completion: nil)
         
     }
