@@ -58,8 +58,9 @@ class AvailablePetsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Available Pets"
         
+
         Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
-            print(response)
+            //print(response)
             
             if let petJSON = response.result.value {
                 let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
@@ -91,9 +92,9 @@ class AvailablePetsTableViewController: UITableViewController {
                     let firstPhotoUrlObject:String = firstPhotoObject["$t"] as! String
                     
                     self.url = URL(string: firstPhotoUrlObject)!
-                    print("URL:", self.url)
+                    print("URL1:", self.url)
                 }
-                
+                print("URL2", self.url)
                 // get breed
                 let breedsObject:Dictionary = petObject["breeds"] as! Dictionary<String, Any>
                 // case where there is one breed (breeds contains one dictionary)
@@ -130,9 +131,19 @@ class AvailablePetsTableViewController: UITableViewController {
                         self.descript = "No description available"
                     }
                 }
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
             }
+
+            
+            
         }
+
+        
         loadData(age: self.age, breed: self.breed, gender: self.gender, name: self.name, size: self.size, type: "add type", city: "add city", state: "add state", descript: self.descript)
+        
+
     }
 
         
@@ -167,7 +178,7 @@ class AvailablePetsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
         
-        print("URK", self.url)
+        print("URL3", self.url)
         
         /*DispatchQueue.global().async {
             let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
