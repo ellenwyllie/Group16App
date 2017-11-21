@@ -12,21 +12,121 @@ import Alamofire
 
 class AvailablePetsTableViewController: UITableViewController {
 
-    var petList = [NSManagedObject]()
+    var petList = [RandomPet]()
     
-    var age:String = ""
+    /*var age:String = ""
     var size:String = ""
     var breed:String = ""
     var name:String = ""
     var gender:String = ""
     var descript:String = ""
-    var url:URL!
+    var url:URL!*/
     
     func generatePet() {
+        var age:String = ""
+        var size:String = ""
+        var breed:String = ""
+        var city:String = ""
+        var state:String = ""
+        var name:String = ""
+        var gender:String = ""
+        var descript:String = ""
+        var url:URL!
+        
+        Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
+            print(response)
+            
+            if let petJSON = response.result.value {
+                let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
+                
+                // get pet object
+                let petFinderObject:Dictionary = responseObject["petfinder"] as! Dictionary<String, Any>
+                let petObject:Dictionary = petFinderObject["pet"] as! Dictionary<String, Any>
+                
+                // get age
+                if let ageObject:Dictionary = petObject["age"] as? Dictionary<String, Any> {
+                    if !ageObject.isEmpty {
+                        age = ageObject["$t"] as! String
+                    }
+                }
+                
+                // get size
+                if let sizeObject:Dictionary = petObject["size"] as? Dictionary<String, Any> {
+                    if !sizeObject.isEmpty {
+                        size = sizeObject["$t"] as! String
+                    }
+                }
+                
+                // get photo
+                let mediaObject:Dictionary = petObject["media"] as! Dictionary<String, Any>
+                if !mediaObject.isEmpty {
+                    let photosObject:Dictionary = mediaObject["photos"] as! Dictionary<String, Any>
+                    let photoArrayObject:Array = photosObject["photo"] as! Array<Dictionary<String, Any>>
+                    let firstPhotoObject:Dictionary = photoArrayObject[1]
+                    let firstPhotoUrlObject:String = firstPhotoObject["$t"] as! String
+                    
+                    url = URL(string: firstPhotoUrlObject)!
+                }
+
+                // get breed
+                let breedsObject:Dictionary = petObject["breeds"] as! Dictionary<String, Any>
+                // case where there is one breed (breeds contains one dictionary)
+                if let breedDictObject:Dictionary = breedsObject["breed"] as? [String: Any] {
+                    breed = breedDictObject["$t"] as! String
+                }
+                    // case where there are multiple breeds (breeds contains array of dictionaries)
+                else {
+                    let breedArrayObject:Array = breedsObject["breed"] as! [[String: Any]]
+                    let firstElementofInnerDict:Dictionary = breedArrayObject[0]
+                    breed = firstElementofInnerDict["$t"] as! String
+                }
+                
+                // get city
+                let contactObject:Dictionary = petObject["contact"] as! Dictionary<String, Any>
+                if let cityObject:Dictionary = contactObject["city"] as? [String: Any] {
+                    city = cityObject["$t"] as! String
+                }
+                // get state
+                if let stateObject:Dictionary = contactObject["state"] as! Dictionary<String, Any> {
+                    state = stateObject["$t"] as! String
+                }
+                
+                // get name
+                if let nameObject:Dictionary = petObject["name"] as? Dictionary<String, Any> {
+                    if !nameObject.isEmpty {
+                        name = nameObject["$t"] as! String
+                    }
+                }
+                
+                // get gender
+                if let genderObject:Dictionary = petObject["sex"] as? Dictionary<String, Any> {
+                    if !genderObject.isEmpty {
+                        gender = genderObject["$t"] as! String
+                    }
+                    
+                }
+                
+                // get description
+                if let descriptionObject:Dictionary = petObject["description"] as? Dictionary<String, Any> {
+                    if !descriptionObject.isEmpty {
+                        descript =  descriptionObject["$t"] as! String
+                    }
+                    else {
+                        descript = "No description available"
+                    }
+                }
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
+            }
+            self.petList.append(RandomPet(age: age, size: size, breed: breed, city: city, state: state, name: name, gender: gender, descript: descript, url: url))
+            
+        }
+        
         
     }
     
-    
+    /*
     func loadData(age: String, breed:String, gender:String, name:String, size:String, type: String, city:String, state:String, descript:String)
     {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -56,99 +156,18 @@ class AvailablePetsTableViewController: UITableViewController {
         }
         
         petList.append(pet)
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Available Pets"
         
-
-        Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
-            print(response)
-            
-            if let petJSON = response.result.value {
-                let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
-                
-                // get pet object
-                let petFinderObject:Dictionary = responseObject["petfinder"] as! Dictionary<String, Any>
-                let petObject:Dictionary = petFinderObject["pet"] as! Dictionary<String, Any>
-                
-                // get age
-                if let ageObject:Dictionary = petObject["age"] as? Dictionary<String, Any> {
-                    if !ageObject.isEmpty {
-                        self.age = ageObject["$t"] as! String
-                    print(self.age)
-                    }
-                }
-                
-                // get size
-                if let sizeObject:Dictionary = petObject["size"] as? Dictionary<String, Any> {
-                    if !sizeObject.isEmpty {
-                        self.size = sizeObject["$t"] as! String
-                    }
-                }
-                
-                // get photo
-                let mediaObject:Dictionary = petObject["media"] as! Dictionary<String, Any>
-                if !mediaObject.isEmpty {
-                    let photosObject:Dictionary = mediaObject["photos"] as! Dictionary<String, Any>
-                    let photoArrayObject:Array = photosObject["photo"] as! Array<Dictionary<String, Any>>
-                    let firstPhotoObject:Dictionary = photoArrayObject[1] 
-                    let firstPhotoUrlObject:String = firstPhotoObject["$t"] as! String
-                    
-                    self.url = URL(string: firstPhotoUrlObject)!
-                }
-                // get breed
-                let breedsObject:Dictionary = petObject["breeds"] as! Dictionary<String, Any>
-                // case where there is one breed (breeds contains one dictionary)
-                if let breedDictObject:Dictionary = breedsObject["breed"] as? [String: Any] {
-                    self.breed = breedDictObject["$t"] as! String
-                }
-                    // case where there are multiple breeds (breeds contains array of dictionaries)
-                else {
-                    let breedArrayObject:Array = breedsObject["breed"] as! [[String: Any]]
-                    let firstElementofInnerDict:Dictionary = breedArrayObject[0]
-                    self.breed = firstElementofInnerDict["$t"] as! String
-                }
-                
-                // get name
-                if let nameObject:Dictionary = petObject["name"] as? Dictionary<String, Any> {
-                    if !nameObject.isEmpty {
-                        self.name = nameObject["$t"] as! String
-                    }
-                }
-                
-                // get gender
-                if let genderObject:Dictionary = petObject["sex"] as? Dictionary<String, Any> {
-                    if !genderObject.isEmpty {
-                        self.gender = genderObject["$t"] as! String
-                    }
-                    
-                }
-                
-                // get description
-                if let descriptionObject:Dictionary = petObject["description"] as? Dictionary<String, Any> {
-                    if !descriptionObject.isEmpty {
-                        self.descript =  descriptionObject["$t"] as! String
-                    }
-                    else {
-                        self.descript = "No description available"
-                    }
-                }
-                DispatchQueue.main.async{
-                    self.tableView.reloadData()
-                }
-            }
-
-            self.loadData(age: self.age, breed: self.breed, gender: self.gender, name: self.name, size: self.size, type: "add type", city: "add city", state: "add state", descript: self.descript)
-            
+        for _ in 1...10 {
+            generatePet()
         }
         
     }
 
-        
-        
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -178,8 +197,10 @@ class AvailablePetsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
         
-        if (self.url != nil) {
-            let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
+        let selectedPet = self.petList[indexPath.row]
+        print("url", selectedPet.url)
+        if (selectedPet.url != nil) {
+            let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
             cell.photo.image = UIImage(data: data!)
         }
         
@@ -229,14 +250,14 @@ class AvailablePetsTableViewController: UITableViewController {
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let selectedPet = petList[indexPath.row]
             print("selectedPet", selectedPet)
-            nextScene.age = selectedPet.value(forKey: "age") as! String
-            nextScene.breed = selectedPet.value(forKey: "breed") as! String
-            nextScene.name = selectedPet.value(forKey: "name") as! String
-            nextScene.location = selectedPet.value(forKey: "city") as! String
-            nextScene.gender = selectedPet.value(forKey: "gender") as! String
-            nextScene.desc = selectedPet.value(forKey: "desc") as! String
-            if (self.url != nil) {
-                let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
+            nextScene.age = selectedPet.age
+            nextScene.breed = selectedPet.breed
+            nextScene.name = selectedPet.name
+            nextScene.location = selectedPet.city + ", " + selectedPet.state
+            nextScene.gender = selectedPet.gender
+            nextScene.desc = selectedPet.descript
+            if (selectedPet.url != nil) {
+                let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
                 nextScene.pic = UIImage(data: data!)!
             }
             
