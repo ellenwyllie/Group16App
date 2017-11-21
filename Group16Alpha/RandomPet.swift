@@ -18,9 +18,10 @@ class RandomPet {
     var gender:String = ""
     var descript:String = ""
     var url:URL!
+    var id:String = ""
 
     
-    init(age: String, size: String, breed: String, city: String, state: String, name: String, gender: String, descript: String, url:URL) {
+    init(age: String, size: String, breed: String, city: String, state: String, name: String, gender: String, descript: String, url:URL, id: String) {
         self.age = age
         self.size = size
         self.breed = breed
@@ -30,6 +31,7 @@ class RandomPet {
         self.gender = gender
         self.descript = descript
         self.url = url
+        self.id = id
     }
 }
 

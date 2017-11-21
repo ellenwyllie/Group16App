@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Search"
         
         self.animalTextField.text = "Any"
         self.sizeTextField.text = "Any"

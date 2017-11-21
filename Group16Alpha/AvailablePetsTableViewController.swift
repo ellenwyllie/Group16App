@@ -32,13 +32,14 @@ class AvailablePetsTableViewController: UITableViewController {
         var name:String = ""
         var gender:String = ""
         var descript:String = ""
+        var id:String = ""
         var url:URL! = URL(string: "https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/10546i3DAC5A5993C8BC8C?v=1.0")
         
         let requestURL:String = "https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json" + self.request
         print(requestURL)
         
         Alamofire.request(requestURL).responseJSON{ response in
-            //print(response)
+            print(response)
             
             if let petJSON = response.result.value {
                 let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
@@ -119,11 +120,20 @@ class AvailablePetsTableViewController: UITableViewController {
                         descript = "No description available"
                     }
                 }
+                
+                // get id
+                if let idObject:Dictionary = petObject["id"] as? Dictionary<String, Any> {
+                    if !idObject.isEmpty {
+                        id = idObject["$t"] as! String
+                    }
+                }
+                
+                
                 DispatchQueue.main.async{
                     self.tableView.reloadData()
                 }
             }
-            self.petList.append(RandomPet(age: age, size: size, breed: breed, city: city, state: state, name: name, gender: gender, descript: descript, url: url))
+            self.petList.append(RandomPet(age: age, size: size, breed: breed, city: city, state: state, name: name, gender: gender, descript: descript, url: url, id: id))
             
         }
         
@@ -270,7 +280,7 @@ class AvailablePetsTableViewController: UITableViewController {
             }
         }
         else {
-            let nextScene = segue.destination as! SearchViewController
+            let nextScene = segue.destination as! MenuViewController
         }
     }
     

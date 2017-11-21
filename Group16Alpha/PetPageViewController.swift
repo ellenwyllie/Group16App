@@ -17,6 +17,7 @@ class PetPageViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var name: String = ""
     var breed: String = ""
@@ -36,6 +37,8 @@ class PetPageViewController: UIViewController {
         locationLabel.text = location
         genderLabel.text = gender
         descriptionLabel.text = desc
+        
+        //favoriteButton
     }
 
     override func didReceiveMemoryWarning() {

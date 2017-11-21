@@ -258,9 +258,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9Pt-9Q-2Rf">
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="lKY-DU-a3b">
+                        <barButtonItem key="rightBarButtonItem" title="Menu" id="lKY-DU-a3b" userLabel="Menu">
                             <connections>
-                                <segue destination="Q7C-zT-b5T" kind="show" identifier="searchSegue" id="0AP-Oh-wAm"/>
+                                <segue destination="GEp-89-aPG" kind="show" id="TAr-wh-IFI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -268,7 +268,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxo-PF-cnh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2231.1999999999998" y="888.30584707646187"/>
+            <point key="canvasLocation" x="1959" y="1477"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="JMi-f8-Djo">
@@ -507,6 +507,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yy7-jp-91H">
+                                <rect key="frame" x="39" y="49" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -530,6 +535,7 @@
                         <outlet property="ageLabel" destination="JFp-Uq-Wnt" id="YGT-oQ-FBA"/>
                         <outlet property="breedLabel" destination="qya-ZF-RuA" id="UA1-Vu-Jt1"/>
                         <outlet property="descriptionLabel" destination="Vqx-TI-LVP" id="xwf-xX-OoB"/>
+                        <outlet property="favoriteButton" destination="Yy7-jp-91H" id="QuF-kZ-bI4"/>
                         <outlet property="genderLabel" destination="cBd-ok-6Cl" id="PNG-3U-Kxv"/>
                         <outlet property="locationLabel" destination="vtb-SK-vLB" id="7Wy-yl-pk2"/>
                         <outlet property="nameLabel" destination="tjv-TV-pYU" id="tDY-r2-BEb"/>
@@ -558,6 +564,62 @@
             </objects>
             <point key="canvasLocation" x="-95.200000000000003" y="128.18590704647679"/>
         </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="yDT-53-h0q">
+            <objects>
+                <viewController id="GEp-89-aPG" customClass="MenuViewController" customModule="Group16Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ElR-VP-wyS"/>
+                        <viewControllerLayoutGuide type="bottom" id="fiD-5f-t1t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VJ5-FG-nXN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOx-yt-rcK">
+                                <rect key="frame" x="172" y="259" width="30" height="30"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="0Vd-mB-Tdo">
+                                <rect key="frame" x="140" y="198" width="95" height="153"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4U-Sj-S9q">
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="30"/>
+                                        <state key="normal" title="Search Pets"/>
+                                        <connections>
+                                            <segue destination="Q7C-zT-b5T" kind="show" identifier="searchSegue" id="356-M6-LFq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5W-ds-pbu">
+                                        <rect key="frame" x="0.0" y="41" width="95" height="30"/>
+                                        <state key="normal" title="Settings"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8x-d5-wfF">
+                                        <rect key="frame" x="0.0" y="82" width="95" height="30"/>
+                                        <state key="normal" title="Available Pets"/>
+                                        <connections>
+                                            <segue destination="qGz-1B-51z" kind="show" id="RwS-ew-UEx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUf-GS-5Oz">
+                                        <rect key="frame" x="0.0" y="123" width="95" height="30"/>
+                                        <state key="normal" title="Favorites"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Vd-mB-Tdo" firstAttribute="centerX" secondItem="oOx-yt-rcK" secondAttribute="centerX" id="Hyn-iE-DGp"/>
+                            <constraint firstItem="0Vd-mB-Tdo" firstAttribute="centerX" secondItem="VJ5-FG-nXN" secondAttribute="centerX" id="Tco-Ve-2Mo"/>
+                            <constraint firstItem="0Vd-mB-Tdo" firstAttribute="centerY" secondItem="oOx-yt-rcK" secondAttribute="centerY" id="XPp-L9-OHE"/>
+                            <constraint firstItem="0Vd-mB-Tdo" firstAttribute="top" secondItem="ElR-VP-wyS" secondAttribute="bottom" constant="134" id="bPb-zp-2FV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tdt-ae-EDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="630" y="1611"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="W4V-VG-b5B">
             <objects>
@@ -574,11 +636,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MIx-u3-OV8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="888.30584707646187"/>
+            <point key="canvasLocation" x="46" y="876"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SX6-h3-ILf"/>
+        <segue reference="RwS-ew-UEx"/>
         <segue reference="KWT-kz-eKm"/>
     </inferredMetricsTieBreakers>
 </document>
