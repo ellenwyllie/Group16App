@@ -31,7 +31,10 @@ class AvailablePetsTableViewController: UITableViewController {
         var name:String = ""
         var gender:String = ""
         var descript:String = ""
-        var url:URL!
+        var url:URL! = URL(string: "https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/10546i3DAC5A5993C8BC8C?v=1.0")
+        
+        //var requestURL:String = "https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json"
+
         
         Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
             print(response)
@@ -246,22 +249,27 @@ class AvailablePetsTableViewController: UITableViewController {
     */
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextScene = segue.destination as! PetPageViewController
-        if let indexPath = self.tableView.indexPathForSelectedRow {
-            let selectedPet = petList[indexPath.row]
-            print("selectedPet", selectedPet)
-            nextScene.age = selectedPet.age
-            nextScene.breed = selectedPet.breed
-            nextScene.name = selectedPet.name
-            nextScene.location = selectedPet.city + ", " + selectedPet.state
-            nextScene.gender = selectedPet.gender
-            nextScene.desc = selectedPet.descript
-            if (selectedPet.url != nil) {
-                let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
-                nextScene.pic = UIImage(data: data!)!
-            }
+        if segue.identifier == "petSegue" {
+            let nextScene = segue.destination as! PetPageViewController
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let selectedPet = petList[indexPath.row]
+                print("selectedPet", selectedPet)
+                nextScene.age = selectedPet.age
+                nextScene.breed = selectedPet.breed
+                nextScene.name = selectedPet.name
+                nextScene.location = selectedPet.city + ", " + selectedPet.state
+                nextScene.gender = selectedPet.gender
+                nextScene.desc = selectedPet.descript
+                if (selectedPet.url != nil) {
+                    let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
+                    nextScene.pic = UIImage(data: data!)!
+                }
             
             //nextScene.pic = UIImage(named: "fido")!
+            }
+        }
+        else {
+            let nextScene = segue.destination as! SearchViewController
         }
     }
     

@@ -12,6 +12,7 @@
 		24D899B61FA8182500E47804 /* PetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D899B51FA8182500E47804 /* PetTableViewCell.swift */; };
 		C12EE1751FBE57750079CE29 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12EE1671FBE56B90079CE29 /* Alamofire.framework */; };
 		C12FD3961FC3A64E0077A19E /* RandomPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12FD3951FC3A64E0077A19E /* RandomPet.swift */; };
+		C12FD3A01FC3B4930077A19E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12FD39F1FC3B4930077A19E /* SearchViewController.swift */; };
 		C14655221FA116DF006D20F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14655211FA116DF006D20F4 /* LoginViewController.swift */; };
 		C14655241FA12245006D20F4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14655231FA12245006D20F4 /* SignUpViewController.swift */; };
 		C19049041FA00D5F000F931B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19049031FA00D5F000F931B /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 		24D899B51FA8182500E47804 /* PetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetTableViewCell.swift; sourceTree = "<group>"; };
 		C12EE15B1FBE56B90079CE29 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C12FD3951FC3A64E0077A19E /* RandomPet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomPet.swift; sourceTree = "<group>"; };
+		C12FD39F1FC3B4930077A19E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C14655211FA116DF006D20F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C14655231FA12245006D20F4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C19049001FA00D5F000F931B /* Group16Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Group16Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +144,7 @@
 				C12EE15B1FBE56B90079CE29 /* Alamofire.xcodeproj */,
 				C19049031FA00D5F000F931B /* AppDelegate.swift */,
 				C19049071FA00D5F000F931B /* Main.storyboard */,
+				C12FD39F1FC3B4930077A19E /* SearchViewController.swift */,
 				C14655211FA116DF006D20F4 /* LoginViewController.swift */,
 				C14655231FA12245006D20F4 /* SignUpViewController.swift */,
 				24D899B11FA80E8F00E47804 /* AvailablePetsTableViewController.swift */,
@@ -293,6 +296,7 @@
 				C14655221FA116DF006D20F4 /* LoginViewController.swift in Sources */,
 				24D899B41FA80EC900E47804 /* PetPageViewController.swift in Sources */,
 				24D899B21FA80E8F00E47804 /* AvailablePetsTableViewController.swift in Sources */,
+				C12FD3A01FC3B4930077A19E /* SearchViewController.swift in Sources */,
 				C19049041FA00D5F000F931B /* AppDelegate.swift in Sources */,
 				C12FD3961FC3A64E0077A19E /* RandomPet.swift in Sources */,
 				C14655241FA12245006D20F4 /* SignUpViewController.swift in Sources */,
