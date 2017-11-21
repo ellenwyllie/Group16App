@@ -22,6 +22,10 @@ class AvailablePetsTableViewController: UITableViewController {
     var descript:String = ""
     var url:URL!
     
+    func generatePet() {
+        
+    }
+    
     
     func loadData(age: String, breed:String, gender:String, name:String, size:String, type: String, city:String, state:String, descript:String)
     {
@@ -60,7 +64,7 @@ class AvailablePetsTableViewController: UITableViewController {
         
 
         Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
-            //print(response)
+            print(response)
             
             if let petJSON = response.result.value {
                 let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
@@ -73,6 +77,7 @@ class AvailablePetsTableViewController: UITableViewController {
                 if let ageObject:Dictionary = petObject["age"] as? Dictionary<String, Any> {
                     if !ageObject.isEmpty {
                         self.age = ageObject["$t"] as! String
+                    print(self.age)
                     }
                 }
                 
@@ -92,9 +97,7 @@ class AvailablePetsTableViewController: UITableViewController {
                     let firstPhotoUrlObject:String = firstPhotoObject["$t"] as! String
                     
                     self.url = URL(string: firstPhotoUrlObject)!
-                    print("URL1:", self.url)
                 }
-                print("URL2", self.url)
                 // get breed
                 let breedsObject:Dictionary = petObject["breeds"] as! Dictionary<String, Any>
                 // case where there is one breed (breeds contains one dictionary)
@@ -120,6 +123,7 @@ class AvailablePetsTableViewController: UITableViewController {
                     if !genderObject.isEmpty {
                         self.gender = genderObject["$t"] as! String
                     }
+                    
                 }
                 
                 // get description
@@ -136,14 +140,10 @@ class AvailablePetsTableViewController: UITableViewController {
                 }
             }
 
-            
+            self.loadData(age: self.age, breed: self.breed, gender: self.gender, name: self.name, size: self.size, type: "add type", city: "add city", state: "add state", descript: self.descript)
             
         }
-
         
-        loadData(age: self.age, breed: self.breed, gender: self.gender, name: self.name, size: self.size, type: "add type", city: "add city", state: "add state", descript: self.descript)
-        
-
     }
 
         
@@ -178,17 +178,13 @@ class AvailablePetsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
         
-        print("URL3", self.url)
-        
-        /*DispatchQueue.global().async {
-            let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            DispatchQueue.main.async {
-                cell.photo.image = UIImage(data: data!)
-            }
-        }*/
+        if (self.url != nil) {
+            let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
+            cell.photo.image = UIImage(data: data!)
+        }
         
         
-        cell.photo.image = UIImage(named: "fido")
+        //cell.photo.image = UIImage(named: "fido")
         
         return cell
     }
@@ -232,14 +228,19 @@ class AvailablePetsTableViewController: UITableViewController {
         let nextScene = segue.destination as! PetPageViewController
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let selectedPet = petList[indexPath.row]
-            
-            //nextScene.age = selectedPet.value(forKey: "age") as! String
+            print("selectedPet", selectedPet)
+            nextScene.age = selectedPet.value(forKey: "age") as! String
             nextScene.breed = selectedPet.value(forKey: "breed") as! String
             nextScene.name = selectedPet.value(forKey: "name") as! String
             nextScene.location = selectedPet.value(forKey: "city") as! String
             nextScene.gender = selectedPet.value(forKey: "gender") as! String
             nextScene.desc = selectedPet.value(forKey: "desc") as! String
-            nextScene.pic = UIImage(named: "fido")!
+            if (self.url != nil) {
+                let data = try? Data(contentsOf: self.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
+                nextScene.pic = UIImage(data: data!)!
+            }
+            
+            //nextScene.pic = UIImage(named: "fido")!
         }
     }
     

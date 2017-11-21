@@ -20,7 +20,7 @@ class PetPageViewController: UIViewController {
     
     var name: String = ""
     var breed: String = ""
-    var age: Int = 0
+    var age: String = ""
     var location: String = ""
     var gender: String = ""
     var desc: String = ""
