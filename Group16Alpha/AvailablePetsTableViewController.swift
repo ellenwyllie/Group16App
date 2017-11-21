@@ -13,6 +13,7 @@ import Alamofire
 class AvailablePetsTableViewController: UITableViewController {
 
     var petList = [RandomPet]()
+    var request = ""
     
     /*var age:String = ""
     var size:String = ""
@@ -33,11 +34,11 @@ class AvailablePetsTableViewController: UITableViewController {
         var descript:String = ""
         var url:URL! = URL(string: "https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/10546i3DAC5A5993C8BC8C?v=1.0")
         
-        //var requestURL:String = "https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json"
-
+        let requestURL:String = "https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json" + self.request
+        print(requestURL)
         
-        Alamofire.request("https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json").responseJSON{ response in
-            print(response)
+        Alamofire.request(requestURL).responseJSON{ response in
+            //print(response)
             
             if let petJSON = response.result.value {
                 let responseObject:Dictionary = petJSON as! Dictionary<String, Any>
@@ -65,7 +66,7 @@ class AvailablePetsTableViewController: UITableViewController {
                 if !mediaObject.isEmpty {
                     let photosObject:Dictionary = mediaObject["photos"] as! Dictionary<String, Any>
                     let photoArrayObject:Array = photosObject["photo"] as! Array<Dictionary<String, Any>>
-                    let firstPhotoObject:Dictionary = photoArrayObject[1]
+                    let firstPhotoObject:Dictionary = photoArrayObject[2]
                     let firstPhotoUrlObject:String = firstPhotoObject["$t"] as! String
                     
                     url = URL(string: firstPhotoUrlObject)!
