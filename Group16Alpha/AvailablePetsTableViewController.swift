@@ -175,8 +175,31 @@ class AvailablePetsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Available Pets"
+        var num = 10
         
-        for _ in 1...10 {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            if !results.isEmpty {
+                num = results[0].value(forKey: "numPets")! as! Int
+            }
+        } else {
+            print("Could not fetch")
+        }
+        
+        
+        for _ in 1...num {
             generatePet()
         }
         

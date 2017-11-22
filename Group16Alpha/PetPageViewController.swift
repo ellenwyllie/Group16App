@@ -108,11 +108,12 @@ class PetPageViewController: UIViewController {
         if(favoriteButton.currentTitle == "Remove from Favorites")
         {
             removePet(id: id)
-            print("REMOVE IS TRIGGERING")
+            favoriteButton.setTitle("Add to Favorites", for: .normal)
         }
         else
         {
             savePet(id: id)
+            favoriteButton.setTitle("Remove from Favorites", for: .normal)
         }
     }
     
