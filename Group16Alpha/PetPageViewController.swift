@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PetPageViewController: UIViewController {
 
@@ -19,7 +20,10 @@ class PetPageViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var favoritePetIDList = [NSManagedObject]()
+    
     var name: String = ""
+    var id: String = ""
     var breed: String = ""
     var age: String = ""
     var location: String = ""
@@ -38,7 +42,49 @@ class PetPageViewController: UIViewController {
         genderLabel.text = gender
         descriptionLabel.text = desc
         
-        //favoriteButton
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            favoritePetIDList = results
+        } else {
+            print("Could not fetch")
+        }
+        
+        var found = false
+        
+        for petID in favoritePetIDList
+        {
+            if(petID.value(forKey:"id") as! String == id)
+            {
+                found = true
+                break
+            }
+        }
+        
+        if(found)
+        {
+            favoriteButton.setTitle("Remove from Favorites", for: .normal)
+        }
+        else
+        {
+            favoriteButton.setTitle("Add to Favorites", for: .normal)
+        }
+            
+            
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +102,66 @@ class PetPageViewController: UIViewController {
         self.navigationController!.navigationBar.barTintColor = nil
         self.navigationController!.navigationBar.isTranslucent = true
         self.navigationController!.navigationBar.tintColor = UIColor.black
+    }
+    
+    @IBAction func addToFavorites(_ sender: Any) {
+        if(favoriteButton.currentTitle == "Remove from Favorites")
+        {
+            removePet(id: id)
+            print("REMOVE IS TRIGGERING")
+        }
+        else
+        {
+            savePet(id: id)
+        }
+    }
+    
+    func savePet(id: String)
+    {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Favorites", in: managedContext)
+        
+        let petID = NSManagedObject(entity: entity!, insertInto:managedContext)
+        
+        petID.setValue(id, forKey: "id")
+        
+        do {
+            try managedContext.save()
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
+    func removePet(id: String)
+    {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        var foundID = NSManagedObject()
+        
+        for petID in favoritePetIDList
+        {
+            if(petID.value(forKey:"id") as! String == id)
+            {
+                foundID = petID
+            }
+        }
+        
+        managedContext.delete(foundID)
+        
+        do {
+            try managedContext.save()
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
     }
     
     /*

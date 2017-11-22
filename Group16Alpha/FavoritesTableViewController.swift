@@ -1,8 +1,8 @@
 //
-//  AvailablePetsTableViewController.swift
+//  FavoritesTableViewController.swift
 //  Group16Alpha
 //
-//  Created by Taylor, Ryan M on 10/30/17.
+//  Created by Taylor, Ryan M on 11/21/17.
 //  Copyright © 2017 Wyllie, Ellen L. All rights reserved.
 //
 
@@ -10,20 +10,12 @@ import UIKit
 import CoreData
 import Alamofire
 
-class AvailablePetsTableViewController: UITableViewController {
+class FavoritesTableViewController: UITableViewController {
 
-    var petList = [RandomPet]()
-    var request = ""
+    var favoritePetIDList = [NSManagedObject]()
+    var favoritePetList = [RandomPet]()
     
-    /*var age:String = ""
-    var size:String = ""
-    var breed:String = ""
-    var name:String = ""
-    var gender:String = ""
-    var descript:String = ""
-    var url:URL!*/
-    
-    func generatePet() {
+    func getPet(id:String) {
         var age:String = ""
         var size:String = ""
         var breed:String = ""
@@ -32,10 +24,9 @@ class AvailablePetsTableViewController: UITableViewController {
         var name:String = ""
         var gender:String = ""
         var descript:String = ""
-        var id:String = ""
         var url:URL! = URL(string: "https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/10546i3DAC5A5993C8BC8C?v=1.0")
         
-        let requestURL:String = "https://api.petfinder.com/pet.getRandom?key=1a41317ad4a0e37d5ddfc61c1c98e34b&output=full&format=json" + self.request
+        let requestURL:String = "https://api.petfinder.com/pet.get?key=1a41317ad4a0e37d5ddfc61c1c98e34b&format=json" + "&id=" + id
         //print(requestURL)
         
         Alamofire.request(requestURL).responseJSON{ response in
@@ -72,7 +63,7 @@ class AvailablePetsTableViewController: UITableViewController {
                     
                     url = URL(string: firstPhotoUrlObject)!
                 }
-
+                
                 // get breed
                 let breedsObject:Dictionary = petObject["breeds"] as! Dictionary<String, Any>
                 // case where there is one breed (breeds contains one dictionary)
@@ -122,96 +113,84 @@ class AvailablePetsTableViewController: UITableViewController {
                 }
                 
                 // get id
-                if let idObject:Dictionary = petObject["id"] as? Dictionary<String, Any> {
+                /*if let idObject:Dictionary = petObject["id"] as? Dictionary<String, Any> {
                     if !idObject.isEmpty {
                         id = idObject["$t"] as! String
                     }
-                }
+                }*/
                 
                 
                 DispatchQueue.main.async{
                     self.tableView.reloadData()
                 }
+                
             }
-            self.petList.append(RandomPet(age: age, size: size, breed: breed, city: city, state: state, name: name, gender: gender, descript: descript, url: url, id: id))
-            
-        }
-        
-        
-    }
     
-    /*
-    func loadData(age: String, breed:String, gender:String, name:String, size:String, type: String, city:String, state:String, descript:String)
-    {
+            self.favoritePetList.append(RandomPet(age: age, size: size, breed: breed, city: city, state: state, name: name, gender: gender, descript: descript, url: url, id: id))
+
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
-        let entity = NSEntityDescription.entity(forEntityName: "Pet", in: managedContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         
-        let pet = NSManagedObject(entity: entity!, insertInto:managedContext)
-        
-        pet.setValue(age, forKey: "age")
-        pet.setValue(breed, forKey: "breed")
-        pet.setValue(gender, forKey: "gender")
-        pet.setValue(name, forKey: "name")
-        pet.setValue(size, forKey: "size")
-        pet.setValue(type, forKey: "type")
-        pet.setValue(city, forKey: "city")
-        pet.setValue(state, forKey: "state")
-        pet.setValue(descript, forKey: "desc")
+        var fetchedResults:[NSManagedObject]? = nil
         
         do {
-            try managedContext.save()
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
         } catch {
             let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            NSLog("Unresolved error \(nserror.userInfo)")
             abort()
         }
         
-        petList.append(pet)
-    }*/
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Available Pets"
-        
-        for _ in 1...10 {
-            generatePet()
+        if let results = fetchedResults {
+            favoritePetIDList = results
+        } else {
+            print("Could not fetch")
         }
         
+        for i in favoritePetIDList
+        {
+            getPet(id: i.value(forKey:"id") as! String)
+        }
+        
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.barTintColor = UIColor(red: (0/255.0), green: (128/225.0), blue: (128/225.0), alpha: 1.0)
-        self.navigationController!.navigationBar.tintColor = UIColor.black
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController!.navigationBar.barTintColor = nil
-        self.navigationController!.navigationBar.isTranslucent = true
-        self.navigationController!.navigationBar.tintColor = UIColor.black
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petList.count
+        // #warning Incomplete implementation, return the number of rows
+        return favoritePetList.count
     }
 
+   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "petCell", for: indexPath) as! PetTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favoritePetCell", for: indexPath) as! FavoritePetTableViewCell
         
-        let selectedPet = self.petList[indexPath.row]
+        let selectedPet = self.favoritePetList[indexPath.row]
         //print("url", selectedPet.url)
         if (selectedPet.url != nil) {
             let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
@@ -219,11 +198,10 @@ class AvailablePetsTableViewController: UITableViewController {
         }
         
         
-        //cell.photo.image = UIImage(named: "fido")
         
         return cell
     }
-    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -259,12 +237,16 @@ class AvailablePetsTableViewController: UITableViewController {
     }
     */
 
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "petSegue" {
+        if segue.identifier == "favoritesSegue" {
             let nextScene = segue.destination as! PetPageViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let selectedPet = petList[indexPath.row]
-                print("selectedPet", selectedPet)
+                let selectedPet = favoritePetList[indexPath.row]
+                //print("selectedPet", selectedPet)
                 nextScene.age = selectedPet.age
                 nextScene.breed = selectedPet.breed
                 nextScene.name = selectedPet.name
@@ -276,12 +258,9 @@ class AvailablePetsTableViewController: UITableViewController {
                     let data = try? Data(contentsOf: selectedPet.url) //make sure your image in this url does exist, otherwise unwrap in   a if let check / try-catch
                     nextScene.pic = UIImage(data: data!)!
                 }
-            
-            //nextScene.pic = UIImage(named: "fido")!
+                
+                //nextScene.pic = UIImage(named: "fido")!
             }
-        }
-        else {
-            let nextScene = segue.destination as! MenuViewController
         }
     }
     
