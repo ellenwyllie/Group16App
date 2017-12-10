@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
@@ -29,6 +30,30 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            if !results.isEmpty {
+                if results[0].value(forKey: "nightMode") as! Int == 1  {
+                    self.view.backgroundColor = .black
+                }
+                
+            }
+        } else {
+            print("Could not fetch")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,6 +102,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         self.myAlert!.addAction(okAction)
         self.present(self.myAlert!, animated: true, completion: nil)
+        
         
     }
     

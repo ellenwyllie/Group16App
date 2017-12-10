@@ -19,6 +19,10 @@ class PetPageViewController: UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var breed2Label: UILabel!
+    @IBOutlet weak var age2Label: UILabel!
+    @IBOutlet weak var location2Label: UILabel!
+    @IBOutlet weak var gender2Label: UILabel!
     
     var favoritePetIDList = [NSManagedObject]()
     
@@ -46,7 +50,7 @@ class PetPageViewController: UIViewController {
         
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
         
         var fetchedResults:[NSManagedObject]? = nil
         
@@ -83,7 +87,39 @@ class PetPageViewController: UIViewController {
         {
             favoriteButton.setTitle("Add to Favorites", for: .normal)
         }
-            
+        
+        
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        fetchedResults = nil
+        
+        do {
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            if !results.isEmpty {
+                if results[0].value(forKey: "nightMode") as! Int == 1  {
+                    self.view.backgroundColor = .black
+                    nameLabel.textColor = .white
+                    breedLabel.textColor = .white
+                    ageLabel.textColor = .white
+                    locationLabel.textColor = .white
+                    genderLabel.textColor = .white
+                    descriptionLabel.textColor = .white
+                    breed2Label.textColor = .white
+                    age2Label.textColor = .white
+                    location2Label.textColor = .white
+                    gender2Label.textColor = .white
+                }
+                
+            }
+        } else {
+            print("Could not fetch")
+        }
             
     }
 

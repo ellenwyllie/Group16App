@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -14,6 +15,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var fidoFinderLabel: UILabel!
+    @IBOutlet weak var signUpLabel: UIButton!
     
     var myAlert:UIAlertController? = nil
 
@@ -24,6 +26,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Settings")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            try fetchedResults = managedContext.fetch(fetchRequest) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            if !results.isEmpty {
+                if results[0].value(forKey: "nightMode") as! Int == 1  {
+                    self.view.backgroundColor = .black
+                }
+                
+            }
+        } else {
+            print("Could not fetch")
+        }
+        
+        self.navigationItem.setHidesBackButton(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
